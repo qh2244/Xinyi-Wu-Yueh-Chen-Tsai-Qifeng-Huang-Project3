@@ -3,6 +3,11 @@ import "./leftbar.css"
 
 export default function Leftbar() {
     return (
-        <div>Leftbar</div>
+        <div className ='Leftbar'>
+            <div>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
     );
 }
