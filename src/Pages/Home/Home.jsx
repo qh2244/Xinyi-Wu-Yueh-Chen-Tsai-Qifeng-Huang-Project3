@@ -1,9 +1,9 @@
 import React from 'react';
-import "./home.css"
 import Navbar from '../../Component/Navbar/Navbar';
 import Leftbar from '../../Component/LeftsideContainer/Leftbar';
 import MainPost from '../../Component/MainPostContainer/MainPost';
 import Rightbar from '../../Component/RightsideContainer/Rightbar';
+import "./home.css"
 
 export default function Home() {
     return (
