@@ -13,7 +13,7 @@ export default function ContentPost() {
                 <img src={`${profileimage}`} className='profileimage' alt="" />
                 <input type="text" className='contentWritingpart' placeholder='Write your real thought...'/>
             </div>
-                <div style={{display:'flex', marginLeft:'5px'}}>
+                <div style={{display:'flex'}}>
                     <div>
                         <img src={`${imageIcon}`} className="icons" alt="" />
                         <img src={`${emojiIcon}`} className="icons" alt="" />

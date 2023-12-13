@@ -51,5 +51,8 @@
     color: white;
     border-radius: 6px;
     margin-left: 20px;
+    cursor: pointer;
+    padding-left: 40px;
+    padding-right: 40px;
 
 }

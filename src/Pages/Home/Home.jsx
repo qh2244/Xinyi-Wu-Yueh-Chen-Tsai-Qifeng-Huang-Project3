@@ -8,12 +8,12 @@ import "./home.css"
 export default function Home() {
     return (
         <div className='home'>
-            <Navbar/>
-            <div className="ComponentContainer">
-                <Leftbar/>
-                <MainPost/>
-                <Rightbar/>
-            </div>
+                <Navbar/>
+                <div className="ComponentContainer">
+                    <Leftbar/>
+                    <MainPost/>
+                    <Rightbar/>
+                </div>
         </div>
-    );
+    )
 }

@@ -13,7 +13,8 @@ export default function Post() {
     const [count, setCount] = useState(10);
     const [Comments, setComments] = useState([]);
     const [commentwriting, setcommentwriting] = useState('')
-    
+    const [show, setshow] = useState(false);
+
 
     const handleLike = () => {
         if (Like === LikeIcon) {
@@ -40,6 +41,14 @@ export default function Post() {
 
     console.log(Comments)
 
+    const handleshow = () => {
+        if (show === false) {
+            setshow(true)
+        } else {
+            setshow(false)
+        }
+    }
+
     return (
         <div className='PostContainer'>
             <div className='SubPostContainer'>
@@ -54,42 +63,50 @@ export default function Post() {
                     </div>
                     <p style={{ textAlign: 'start', width: '96%', marginLeft: 10, marginTop: 0 }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam consectetur possimus illum dicta at aspernatur......</p>
                     <img src={`${ProfileImage}`} className='PostImages' alt="" />
-                    <div style={{ display: 'flex'}}>
+                    <div style={{ display: 'flex' }}>
                         <div style={{ display: 'flex', marginLeft: '10px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                                 <img src={`${Like}`} className='iconsforPost' onClick={handleLike} alt="" />
                                 <p style={{ marginLeft: '6px' }}>{count} likes</p>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', marginLeft: 20, cursor: 'pointer' }}>
-                                <img src={`${CommentIcon}`} className='iconsforPost' alt="" />
+                                <img src={`${CommentIcon}`} className='iconsforPost' onClick={handleshow} alt="" />
                                 <p style={{ marginLeft: '6px' }}>100k Comments</p>
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', marginLeft: 180, cursor: 'pointer' }}>
-                                <img src={`${ShareIcon}`} className='iconsforPost' alt="" />
-                                <p style={{ marginLeft: '6px' }}>Share</p>
+                            <img src={`${ShareIcon}`} className='iconsforPost' alt="" />
+                            <p style={{ marginLeft: '6px' }}>Share</p>
                         </div>
                     </div>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <img src={`${ProfileImage}`} className='PostImage' alt="" />
-                        {/* <p style={{marginLeft:"6px"}}>Suman</p> */}
-                        <input type="text" className='commentinput' placeholder='Write your thought' onChange={(e) => setcommentwriting(e.target.value)} />
-                        <button className='addCommentbtn' onClick={handleComment}>Add Comment</button>
-                    </div>
-                    {Comments.map((item)=>(
-                        <div style={{display:'flex', alignItems:'center'}}>
-                            <img src={`${ProfileImage}`} className='PostImage' alt="" />
-                            <p style={{ marginLeft: "6px" }}>{item.username}</p>
-                            <p style={{marginLeft:'20px'}}>{item.title}</p>
-                        </div>
-                    ))}
+                    {show === true ?
+                        <div style={{ padding: '10px' }}>
+                            <div style={{ display: "flex", alignItems: "center" }}>
+                                <img src={`${ProfileImage}`} className='PostImage' alt="" />
+                                {/* <p style={{marginLeft:"6px"}}>Suman</p> */}
+                                <input type="text" className='commentinput' placeholder='Write your thought' onChange={(e) => setcommentwriting(e.target.value)} />
+                                <button className='addCommentbtn' onClick={handleComment}>Post</button>
+                            </div>
+                            {Comments.map((item) => (
+                                <div style={{  alignItems: 'center' }}>
+                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                        <img src={`${ProfileImage}`} className='PostImage' alt="" />
+                                        <p style={{ marginLeft: "6px" , fontSize:18 , marginTop:6}}>{item.username}</p>
+                                    </div>
+                                    <p style={{ marginLeft: '55px', textAlign: 'start', marginTop: -16 }}>{item.title}</p>
+                                    <p style={{ marginLeft: '55px', textAlign: 'start', marginTop: -10 , color:"#aaa" , fontSize:11}}>Reply</p>
+                                </div>
+                            ))}
+                        </div> : ''
+                    }
+
                     <div>
                     </div>
                 </div>
             </div>
-                
+
         </div>
-        
+
     );
 }
 
