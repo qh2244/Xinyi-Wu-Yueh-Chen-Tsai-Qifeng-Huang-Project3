@@ -17,7 +17,7 @@ export default function ProfileLeftbar() {
                     <img src={`${image2}`} className="Profilepageimage" alt="" />
                     <div>
                         <p style={{marginLeft:6 , marginTop:20 , color:"black" , textAlign:'start'}}>Suman</p>
-                        <p style={{marginLeft:6 , marginTop:20 , color:"black" , textAlign:'start' , marginTop:-16 , fontSize:11}}>Software Developer</p>
+                        <p style={{marginLeft:6 , marginTop:20 , color:"black" , textAlign:'start', fontSize:11}}>Software Developer</p>
                     </div>
                     
                 </div>
