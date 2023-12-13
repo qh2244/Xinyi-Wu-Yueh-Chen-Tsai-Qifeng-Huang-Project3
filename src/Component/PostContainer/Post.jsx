@@ -13,6 +13,7 @@ export default function Post() {
     const [count, setCount] = useState(10);
     const [Comments, setComments] = useState([]);
     const [commentwriting, setcommentwriting] = useState('')
+    
 
     const handleLike = () => {
         if (Like === LikeIcon) {
