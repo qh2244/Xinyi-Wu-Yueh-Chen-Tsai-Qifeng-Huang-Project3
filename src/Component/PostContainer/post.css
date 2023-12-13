@@ -17,9 +17,8 @@
     margin-left: 10px;
 }
 .PostImages{
-    width: 450px;
-    height: 500px;
-    margin-left: 30px;
+    width: 500px;
+    height: 450px;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -31,7 +30,7 @@
 
 .moreicons{
     width: 20px;
-    margin-left: 310px;
+    margin-left: 380px;
 }
 
 .commentinput{
