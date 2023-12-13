@@ -1,8 +1,11 @@
 /* .PostContainer{
-
+    
 } */
 
 .SubPostContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 93%;
     background-color: white;
     margin-top: 20px;
@@ -17,9 +20,9 @@
     margin-left: 10px;
 }
 .PostImages{
-    width: 500px;
+    width: 450px;
     height: 450px;
-    object-fit: cover;
+    margin-left: 40px;
     border-radius: 10px;
 }
 
@@ -30,13 +33,15 @@
 
 .moreicons{
     width: 20px;
-    margin-left: 380px;
+    margin-left: 330px;
 }
 
 .commentinput{
-    width: 24pc;
-    margin-left: 10px;
+    width: 20pc;
+    margin-left: 20px;
     border: none;
+    height: 6vh;
+
 
 }
 .addCommentbtn{
@@ -45,8 +50,6 @@
     background-color: black;
     color: white;
     border-radius: 6px;
-    margin-left: 39px;
-    cursor: pointer;
-    padding-left: 40px;
-    padding-right: 40px;
+    margin-left: 20px;
+
 }

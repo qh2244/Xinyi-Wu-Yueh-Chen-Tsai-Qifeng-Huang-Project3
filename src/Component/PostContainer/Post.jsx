@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React, { useState } from 'react';
 import "./post.css"
 import ProfileImage from "../Images/Profile.png"
@@ -70,9 +71,18 @@ export default function Post() {
                     </div>
                     <div style={{ display: "flex", alignItems: "center" }}>
                         <img src={`${ProfileImage}`} className='PostImage' alt="" />
-                        {/*<p style={{marginLeft:"6px"}}>Suman</p>*/}
+                        {/* <p style={{marginLeft:"6px"}}>Suman</p> */}
                         <input type="text" className='commentinput' placeholder='Write your thought' onChange={(e) => setcommentwriting(e.target.value)} />
-                        <button className='addCommentbtn'>Add Comment</button>
+                        <button className='addCommentbtn' onClick={handleComment}>Add Comment</button>
+                    </div>
+                    {Comments.map((item)=>(
+                        <div style={{display:'flex', alignItems:'center'}}>
+                            <img src={`${ProfileImage}`} className='PostImage' alt="" />
+                            <p style={{ marginLeft: "6px" }}>{item.username}</p>
+                            <p style={{marginLeft:'20px'}}>{item.title}</p>
+                        </div>
+                    ))}
+                    <div>
                     </div>
                 </div>
             </div>
