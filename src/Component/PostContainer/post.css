@@ -20,8 +20,8 @@
     margin-left: 10px;
 }
 .PostImages{
-    width: 450px;
-    height: 450px;
+    width: 85%;
+    height: 85%px;
     margin-left: 40px;
     border-radius: 10px;
 }
@@ -33,7 +33,7 @@
 
 .moreicons{
     width: 20px;
-    margin-left: 330px;
+    margin-left: 65%;
 }
 
 .commentinput{
