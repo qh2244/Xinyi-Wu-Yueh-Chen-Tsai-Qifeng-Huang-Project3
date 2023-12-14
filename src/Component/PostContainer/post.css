@@ -20,8 +20,9 @@
     margin-left: 10px;
 }
 .PostImages{
-    width: 85%;
-    height: 85%px;
+    width:500px;
+    height:450px;
+    object-fit: cover;
     border-radius: 10px;
 }
 

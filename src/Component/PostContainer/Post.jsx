@@ -62,8 +62,8 @@ export default function Post({post}) {
                         </div>
                         <img src={`${Moreoption}`} className='moreicons' alt="" />
                     </div>
-                    <p style={{ textAlign: 'start', width: '96%', marginLeft: 10, marginTop: 0 }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam consectetur possimus illum dicta at aspernatur......</p>
-                    <img src={`${ProfileImage}`} className='PostImages' alt="" />
+                    <p style={{ textAlign: 'start', width: '96%', marginLeft: 10, marginTop: 0 }}>{post.title}</p>
+                    <img src={`${post.image}`} className='PostImages' alt="" />
                     <div style={{ display: 'flex' }}>
                         <div style={{ display: 'flex', marginLeft: '10px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>

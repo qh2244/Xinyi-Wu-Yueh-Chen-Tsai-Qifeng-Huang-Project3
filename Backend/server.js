@@ -18,7 +18,6 @@ console.log("DB connection successfull")).catch(()=>{
 // mongoose.connect(MONGO_CONNECTION_STRING, {useNewUrlParser: true});
 
 app.use(cors());
-
 app.use(express.json());
 app.use("/api/user", userRouter);
 app.use("/api/post", PostRouter)
