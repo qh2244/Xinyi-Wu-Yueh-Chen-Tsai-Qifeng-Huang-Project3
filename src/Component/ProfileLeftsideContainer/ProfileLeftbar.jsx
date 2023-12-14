@@ -16,8 +16,8 @@ export default function ProfileLeftbar() {
                 <div style={{display:'flex' , alignItems:'center' , marginTop:-30}}>
                     <img src={`${image2}`} className="Profilepageimage" alt="" />
                     <div>
-                        <p style={{marginLeft:6 , marginTop:20 , color:"black" , textAlign:'start'}}>Suman</p>
-                        <p style={{marginLeft:6 , marginTop:20 , color:"black" , textAlign:'start', fontSize:11}}>Software Developer</p>
+                        <p style={{marginLeft:6 , marginTop:30 , color:"black" , textAlign:'start'}}>Suman</p>
+                        <p style={{marginLeft:6 , marginTop:-10 , color:"black" , textAlign:'start', fontSize:11}}>Software Developer</p>
                     </div>
                     
                 </div>

@@ -4,7 +4,12 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { verifyToken } = require("./verifytoken");
+const Post = require("../Modals/Post");
+const VerificationToken = require("../Modals/VerificationToken");
+const ResetToken = require("../Modals/ResetToken");
 const JWTSEC = "#2@!@$ndja45883 r7##";
+const nodemailer = require('nodemailer');
+const crypto = require("crypto");
 
 router.post("/create/user",
     body('email').isEmail(),
@@ -17,7 +22,7 @@ router.post("/create/user",
             return res.status(400).json({ errors: errors.array() });
         }
 
-        try {
+        //try {
             let user = await User.findOne({ email: req.body.email });
             if (user) {
                 return res.status(400).json({ message: "Please login with correct password" });
@@ -40,10 +45,10 @@ router.post("/create/user",
             
             await user.save();
             res.status(200).json({user, accessToken});
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json({ message: "Internal error occurred" });
-        }
+        // } catch (error) {
+        //     console.error(error);
+        //     return res.status(500).json({ message: "Internal error occurred" });
+        // }
 });
 
 //verify email
@@ -92,12 +97,6 @@ router.post("/login" ,
     body('email').isEmail(),
     body('password').isLength({ min: 6 }) ,
     async(req , res)=>{
-          const error = validationResult(req);
-          if(!error.isEmpty()){
-                    return res.status(400).json("some error occured")
-          }
-
-          try {
           const user = await User.findOne({email:req.body.email});
           if(!user){
                   return res.status(400).json("User doesn't found")  
@@ -113,11 +112,6 @@ router.post("/login" ,
           }, JWTSEC);
           const {password , ...other} = user._doc
           res.status(200).json({other , accessToken});
-                    
-} catch (error) {
-            res.status(500).json("Internal error occured")        
-}
-
 })
 
 //Forgot password

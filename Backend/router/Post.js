@@ -22,7 +22,7 @@ router.get("/get/post/:id" , async(req , res)=>{
           try {
                    const mypost = await Post.find({user:req.params.id});
                    if(!mypost){
-                    return res.status(200).json("You don't have any post")
+                    return res.status(400).json("You don't have any post")
                    }
 
                    res.status(200).json(mypost)
