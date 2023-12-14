@@ -8,12 +8,13 @@ import ShareIcon from "../Images/share.png"
 import Moreoption from "../Images/more.png"
 import anotherlikeicon from "../Images/setLike.png"
 
-export default function Post() {
+export default function Post({post}) {
     const [Like, setLike] = useState(LikeIcon);
     const [count, setCount] = useState(10);
     const [Comments, setComments] = useState([]);
     const [commentwriting, setcommentwriting] = useState('')
     const [show, setshow] = useState(false);
+    console.log(post)
 
 
     const handleLike = () => {
