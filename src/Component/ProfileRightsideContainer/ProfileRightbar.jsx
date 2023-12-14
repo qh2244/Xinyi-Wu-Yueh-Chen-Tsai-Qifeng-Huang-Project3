@@ -13,37 +13,27 @@ export default function ProfileRightbar() {
     return (
         <div className='Profilerightbar'>
             <div className='profilerightcontainer'>
-                <h3>Friend request</h3>
+                <h3>Followers</h3>
                 <div>
-                    <div>
+                    <div style = {{marginTop:"10px"}}>
                         <div style={{ display: 'flex', alignItems: "center", marginLeft: 10, cursor: "pointer" }}>
                             <img src={`${image1}`} className="Friendsimage" alt="" />
-                            <p style={{ textAlign: "start", marginLeft: "10px" }}>Rin jonsion wants to make you friends</p>
-                        </div>
-                        <div style={{display:"flex" , justifyContent:'space-around'}}>
-                            <button style={{paddingLeft:"30px", paddingRight:"30px" , paddingTop:5 , paddingBottom:5, border:"none" , backgroundColor:"black", color:"white" , borderRadius:"10px"}}>Accept</button>
-                            <button style={{paddingLeft:"30px", paddingRight:"30px" , paddingTop:5 , paddingBottom:5, border:"none" , backgroundColor:"black", color:"white" , borderRadius:"10px"}}>Deny</button>
+                            <p style={{ textAlign: "start", marginLeft: "10px" }}>Rin jonsion</p>
                         </div>
                     </div>
-                    <div>
+                    <div style = {{marginTop:"10px"}}>
                         <div style={{ display: 'flex', alignItems: "center", marginLeft: 10, cursor: "pointer" }}>
                             <img src={`${image2}`} className="Friendsimage" alt="" />
-                            <p style={{ textAlign: "start", marginLeft: "10px" }}>Rin jonsion wants to make you friends</p>
+                            <p style={{ textAlign: "start", marginLeft: "10px" }}>Rin jonsion</p>
                         </div>
-                        <div style={{display:"flex" , justifyContent:'space-around'}}>
-                            <button style={{paddingLeft:"30px", paddingRight:"30px" , paddingTop:5 , paddingBottom:5, border:"none" , backgroundColor:"black", color:"white" , borderRadius:"10px"}}>Accept</button>
-                            <button style={{paddingLeft:"30px", paddingRight:"30px" , paddingTop:5 , paddingBottom:5, border:"none" , backgroundColor:"black", color:"white" , borderRadius:"10px"}}>Deny</button>
-                        </div>
+                        
                     </div>
-                    <div>
+                    <div style = {{marginTop:"10px"}}>
                         <div style={{ display: 'flex', alignItems: "center", marginLeft: 10, cursor: "pointer" }}>
                             <img src={`${image5}`} className="Friendsimage" alt="" />
-                            <p style={{ textAlign: "start", marginLeft: "10px" }}>Rin jonsion wants to make you friends</p>
+                            <p style={{ textAlign: "start", marginLeft: "10px" }}>Rin jonsion</p>
                         </div>
-                        <div style={{display:"flex" , justifyContent:'space-around'}}>
-                            <button style={{paddingLeft:"30px", paddingRight:"30px" , paddingTop:5 , paddingBottom:5, border:"none" , backgroundColor:"black", color:"white" , borderRadius:"10px"}}>Accept</button>
-                            <button style={{paddingLeft:"30px", paddingRight:"30px" , paddingTop:5 , paddingBottom:5, border:"none" , backgroundColor:"black", color:"white" , borderRadius:"10px"}}>Deny</button>
-                        </div>
+                        
                     </div>
 
                    

@@ -27,7 +27,7 @@ export default function ProfileLeftbar() {
                 </div>
                 
                 <div style = {{display:'flex' , justifyContent:'space-between' , marginTop:-20}}>
-                    <p style={{color:"black" , marginLeft:20 , fontSize:"14px"}}>Friends</p>
+                    <p style={{color:"black" , marginLeft:20 , fontSize:"14px"}}>Followers</p>
                     <p style={{color:"black" , marginRight:20 ,  fontSize:"12px" , marginTop:17}}>4324</p>
                 </div>
     
@@ -38,33 +38,33 @@ export default function ProfileLeftbar() {
                 <button style={{width:"100%" , paddingTop:4 , paddingBottom: 7 , border:"none" , backgroundColor:"green" , color:"white"}}>Edit Bio</button>
             </div>
             <div className='NotificationsContainer'>
-                <h3>Your friends</h3>
+                <h3>Followings</h3>
                 <div style={{display:"flex" , justifyContent:'space-between'}}>
                     <p style={{marginLeft:10}}>Friends</p>
                     <p style={{marginRight:10 , color:"#aaa"}}>See all</p>
                 </div>
                 <div style={{display:'flex' , flexWrap:"wrap" , marginLeft:5}}>
-                    <div style={{marginLeft:4}}>
+                    <div style={{marginLeft:4, cursor: "pointer"}}>
                         <img src={`${image2}`}  className="friendimage" alt="" />
                         <p style={{marginTop:-2}}>Dan gAN</p>
                     </div>
-                    <div style={{marginLeft:4}}>
+                    <div style={{marginLeft:4, cursor: "pointer"}}>
                         <img src={`${image1}`}  className="friendimage" alt="" />
                         <p style={{marginTop:-2}}>Samn</p>
                     </div>
-                    <div style={{marginLeft:4}}>
+                    <div style={{marginLeft:4, cursor: "pointer"}}>
                         <img src={`${image5}`}  className="friendimage" alt="" />
                         <p style={{marginTop:-2}}>Uman</p>
                     </div>
-                    <div style={{marginLeft:3}}>
+                    <div style={{marginLeft:4, cursor: "pointer"}}>
                         <img src={`${image2}`}  className="friendimage" alt="" />
                         <p style={{marginTop:-2}}>Dan gAN</p>
                     </div>
-                    <div style={{marginLeft:4}}>
+                    <div style={{marginLeft:4, cursor: "pointer"}}>
                         <img src={`${image6}`}  className="friendimage" alt="" />
                         <p style={{marginTop:-2}}>Samn</p>
                     </div>
-                    <div style={{marginLeft:4}}>
+                    <div style={{marginLeft:4, cursor: "pointer"}}>
                         <img src={`${image4}`}  className="friendimage" alt="" />
                         <p style={{marginTop:-2}}>Uman</p>
                     </div>
