@@ -4,7 +4,6 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const userRouter = require("./router/user")
 const PostRouter = require("./router/Post")
-
 const cors = require("cors");
 
 dotenv.config();

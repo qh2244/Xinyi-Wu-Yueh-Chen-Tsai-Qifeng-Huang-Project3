@@ -8,13 +8,12 @@ import ShareIcon from "../Images/share.png"
 import Moreoption from "../Images/more.png"
 import anotherlikeicon from "../Images/setLike.png"
 
-export default function Post({post}) {
+export default function Post() {
     const [Like, setLike] = useState(LikeIcon);
     const [count, setCount] = useState(10);
     const [Comments, setComments] = useState([]);
     const [commentwriting, setcommentwriting] = useState('')
     const [show, setshow] = useState(false);
-    console.log(post)
 
 
     const handleLike = () => {
@@ -62,8 +61,8 @@ export default function Post({post}) {
                         </div>
                         <img src={`${Moreoption}`} className='moreicons' alt="" />
                     </div>
-                    <p style={{ textAlign: 'start', width: '96%', marginLeft: 10, marginTop: 0 }}>{post.title}</p>
-                    <img src={`${post.image}`} className='PostImages' alt="" />
+                    <p style={{ textAlign: 'start', width: '96%', marginLeft: 10, marginTop: 0 }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam consectetur possimus illum dicta at aspernatur......</p>
+                    <img src={`${ProfileImage}`} className='PostImages' alt="" />
                     <div style={{ display: 'flex' }}>
                         <div style={{ display: 'flex', marginLeft: '10px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
