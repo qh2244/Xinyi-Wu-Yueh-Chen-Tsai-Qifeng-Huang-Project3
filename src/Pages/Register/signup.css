@@ -1,0 +1,64 @@
+/* signup.css */
+
+.mainContainerForsignup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .submainContainer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logoText {
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .part {
+    color: rgb(167, 127, 127); /* You can choose your preferred color */
+  }
+  
+  .introtext {
+    font-size: 20px;
+    color: #555;
+    margin-top: -40px;
+  }
+  
+  .createaccountTxt {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .inputText {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .btnforsignup {
+    background-color: rgb(167, 127, 127); /* You can choose your preferred color */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .btnforsignup:hover {
+    background-color: #2980b9; /* Darker shade for hover effect */
+  }
+  
+  
