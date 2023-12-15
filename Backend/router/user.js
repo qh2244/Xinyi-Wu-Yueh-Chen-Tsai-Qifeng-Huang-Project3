@@ -5,51 +5,71 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { verifyToken } = require("./verifytoken");
 const Post = require("../Modals/Post");
+const { generateOTP } = require("./Extra/mail");
 const VerificationToken = require("../Modals/VerificationToken");
-const ResetToken = require("../Modals/ResetToken");
 const JWTSEC = "#2@!@$ndja45883 r7##";
 const nodemailer = require('nodemailer');
+const ResetToken = require("../Modals/ResetToken");
 const crypto = require("crypto");
-
-router.post("/create/user",
+router.post("/create/user" ,
     body('email').isEmail(),
-    body('password').isLength({ min: 6 }),
-    body('username').isLength({ min: 5 }),
-    body('phonenumber').isLength({ min: 10 }),
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
+    body('password').isLength({ min: 6 }) ,
+    body('username').isLength({ min: 3 }) ,
+    body('phonenumber').isLength({ min: 10}) ,
+    async(req , res)=>{
+          const error = validationResult(req);
+          if(!error.isEmpty()){
+                    return res.status(400).json("some error occured")
+          }
+        //   try {
+        
+          let user = await User.findOne({email:req.body.email});
+          if(user){
+                    return res.status(200).json("Please login with correct password")
+          };
+          const salt = await bcrypt.genSalt(10);
+          const secpass = await bcrypt.hash(req.body.password , salt)
 
-        //try {
-            let user = await User.findOne({ email: req.body.email });
-            if (user) {
-                return res.status(400).json({ message: "Please login with correct password" });
+          user = await User.create({
+                    username:req.body.username,
+                    email:req.body.email,
+                    password:secpass,
+                    profile:req.body.profile,
+                    phonenumber:req.body.phonenumber
+          })
+          const accessToken = jwt.sign({
+                    id:user._id,
+                    username:user.username
+          }, JWTSEC);
+          const OTP = generateOTP();
+          const verificationToken = await VerificationToken.create({
+            user:user._id,
+            token:OTP
+          });
+          verificationToken.save();
+          await user.save();
+          const transport = nodemailer.createTransport({
+            host: "smtp.mailtrap.io",
+            port: 2525,
+            auth: {
+              user: process.env.USER,
+              pass: process.env.PASS
             }
-            const salt = await bcrypt.genSalt(10);
-            const secpass = await bcrypt.hash(req.body.password, salt)
+          });
+          transport.sendMail({
+            from:"sociaMedia@gmail.com",
+            to:user.email,
+            subject:"Verify your email using OTP",
+            html:`<h1>Your OTP CODE ${OTP}</h1>`
+          })
+          res.status(200).json({Status:"Pending" , msg:"Please check your email" , user:user._id})
+                  
+// } catch (error) {
+//           return res.status(400).json("Internal error occured")         
+// }
+          
+})
 
-            user = await User.create({
-                username: req.body.username,
-                email: req.body.email,
-                password: secpass,
-                profile: req.body.profile,
-                phonenumber: req.body.phonenumber
-            });
-
-            const accessToken = jwt.sign({
-                id:user._id,
-                username:user.username
-            }, JWTSEC)
-            
-            await user.save();
-            res.status(200).json({user, accessToken});
-        // } catch (error) {
-        //     console.error(error);
-        //     return res.status(500).json({ message: "Internal error occurred" });
-        // }
-});
 
 //verify email
 router.post("/verify/email" , async(req , res)=>{
@@ -97,6 +117,12 @@ router.post("/login" ,
     body('email').isEmail(),
     body('password').isLength({ min: 6 }) ,
     async(req , res)=>{
+        //   const error = validationResult(req);
+        //   if(!error.isEmpty()){
+        //             return res.status(400).json("some error occured")
+        //   }
+
+        //   try {
           const user = await User.findOne({email:req.body.email});
           if(!user){
                   return res.status(400).json("User doesn't found")  
@@ -112,6 +138,11 @@ router.post("/login" ,
           }, JWTSEC);
           const {password , ...other} = user._doc
           res.status(200).json({other , accessToken});
+                    
+// } catch (error) {
+//             res.status(500).json("Internal error occured")        
+// }
+
 })
 
 //Forgot password
@@ -133,7 +164,7 @@ router.post("/forgot/password" , async(req , res)=>{
     });
     await resetToken.save();
     const transport = nodemailer.createTransport({
-        host: "smtp.mailtrap.io",
+        host: "sandbox.smtp.mailtrap.io",
         port: 2525,
         auth: {
           user: process.env.USER,
@@ -144,7 +175,7 @@ router.post("/forgot/password" , async(req , res)=>{
         from:"sociaMedia@gmail.com",
         to:user.email,
         subject:"Reset Token",
-        html:`http://localhost:3000/reset/password?token=${RandomTxt}&_id=${user._id}`
+        html:`http://localhost:5173/reset/password?token=${RandomTxt}&_id=${user._id}`
       })
 
       return res.status(200).json("Check your email to reset password")
@@ -256,7 +287,7 @@ router.put("/update/:id" , verifyToken , async(req , res)=>{
 })
 
 //Delete User account 
-router.delete("delete/:id" , verifyToken , async(req , res)=>{
+router.delete("/delete/:id" , verifyToken , async(req , res)=>{
     try {
         if(req.params.id !== req.user.id){
             return res.status(400).json("Account doesn't match")
@@ -276,7 +307,7 @@ router.get("/post/user/details/:id" , async(req , res)=>{
         if(!user){
             return res.status(400).json("User not found")
         }
-        const {email , password , phonenumber , Followers , Following , ...others}=user._doc;
+        const {email , password , phonenumber , ...others}=user._doc;
         res.status(200).json(others);
     } catch (error) {
         return res.status(500).json("Internal server error")
@@ -284,7 +315,7 @@ router.get("/post/user/details/:id" , async(req , res)=>{
 })
 
 //get user to follow
-router.get("/all/user/" , async(req , res)=>{
+router.get("/all/user/:id" , async(req , res)=>{
     try {
         const allUser = await User.find();
         const user = await User.findById(req.params.id);
@@ -308,10 +339,9 @@ router.get("/all/user/" , async(req , res)=>{
 
         res.status(200).json(filteruser)
     } catch (error) {
-        return res.status(500).json("Internal server error")
+        
     }
 })
-
 
 
 

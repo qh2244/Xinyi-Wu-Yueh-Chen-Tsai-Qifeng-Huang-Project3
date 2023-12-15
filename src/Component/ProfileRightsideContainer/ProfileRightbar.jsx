@@ -1,161 +1,73 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import "./profilerightbar.css"
-import ads from "../Images/ads.jpg";
-import image1 from "../Images/image3.jpg";
-import image2 from "../Images/image2.jpg";
-import image4 from "../Images/image4.jpg";
-import image5 from "../Images/image5.jpg";
-import image6 from "../Images/image6.jpg";
-import image7 from "../Images/image1.jpg";
-import addFriends from "../Images/add-user.png"
-
+import axios from 'axios';
+import Follow from '../RightsideContainer/follow';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 export default function ProfileRightbar() {
-    return (
-        <div className='Profilerightbar'>
-            <div className='profilerightcontainer'>
-                <h3>Followers</h3>
-                <div>
-                    <div style = {{marginTop:"10px"}}>
-                        <div style={{ display: 'flex', alignItems: "center", marginLeft: 10, cursor: "pointer" }}>
-                            <img src={`${image1}`} className="Friendsimage" alt="" />
-                            <p style={{ textAlign: "start", marginLeft: "10px" }}>Rin jonsion</p>
-                        </div>
-                    </div>
-                    <div style = {{marginTop:"10px"}}>
-                        <div style={{ display: 'flex', alignItems: "center", marginLeft: 10, cursor: "pointer" }}>
-                            <img src={`${image2}`} className="Friendsimage" alt="" />
-                            <p style={{ textAlign: "start", marginLeft: "10px" }}>Rin jonsion</p>
-                        </div>
-                        
-                    </div>
-                    <div style = {{marginTop:"10px"}}>
-                        <div style={{ display: 'flex', alignItems: "center", marginLeft: 10, cursor: "pointer" }}>
-                            <img src={`${image5}`} className="Friendsimage" alt="" />
-                            <p style={{ textAlign: "start", marginLeft: "10px" }}>Rin jonsion</p>
-                        </div>
-                        
-                    </div>
+  const userDetails = useSelector((state)=>state.user);
+  let user = userDetails.user
+  let location = useLocation();
+  let id = location.pathname.split("/")[2];
+  let idforSuggest = user?.other?._id
+  const [Followinguser , setFollowinguser] = useState([]);
+  useEffect(() => {
+    const getFollowing = async()=>{
+      try {
+        const res = await axios.get(`http://localhost:8000/api/post/followers/${id}`);
+        setFollowinguser(res.data);
+      } catch (error) {
+        console.log("Error")
+      }
+    }
+    getFollowing();
+  }, [])
 
-                   
-                  
-                </div>
-            </div>
+  console.log(Followinguser)
 
-            <div className='rightcontainer2'>
-                <h3 style={{ textAlign: 'start', marginLeft: '10px' }}>Suggested for you</h3>
-                <div style={{ marginTop: '-10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={`${image2}`} className="Profileimage" alt="" />
-                            <div>
-                                <p style={{ marginLeft: "10px", textAlign: 'start' }}>Qifeng</p>
-                                <p style={{ marginLeft: "10px", textAlign: 'start', marginTop: '-16px', fontSize: '11px', color: '#aaa' }}>Suggested for you</p>
-                            </div>
-                        </div>
-                        <div style={{ backgroundColor: "#aaa", padding: '10px', marginRight: 13, borderRadius: '50%', cursor: 'pointer' }}>
-                            <img src={`${addFriends}`} className="addfriend" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div style={{ marginTop: '-10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={`${image1}`} className="Profileimage" alt="" />
-                            <div>
-                                <p style={{ marginLeft: "10px", textAlign: 'start' }}>Xinyi Wu</p>
-                                <p style={{ marginLeft: "10px", textAlign: 'start', marginTop: '-16px', fontSize: '11px', color: '#aaa' }}>Followed by Qifeng Huang</p>
-                            </div>
-                        </div>
-                        <div style={{ backgroundColor: "#aaa", padding: '10px', marginRight: 13, borderRadius: '50%', cursor: 'pointer' }}>
-                            <img src={`${addFriends}`} className="addfriend" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div style={{ marginTop: '-10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={`${image4}`} className="Profileimage" alt="" />
-                            <div>
-                                <p style={{ marginLeft: "10px", textAlign: 'start' }}>James</p>
-                                <p style={{ marginLeft: "10px", textAlign: 'start', marginTop: '-16px', fontSize: '11px', color: '#aaa' }}>Suggested for you</p>
-                            </div>
-                        </div>
-                        <div style={{ backgroundColor: "#aaa", padding: '10px', marginRight: 13, borderRadius: '50%', cursor: 'pointer' }}>
-                            <img src={`${addFriends}`} className="addfriend" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div style={{ marginTop: '-10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={`${image5}`} className="Profileimage" alt="" />
-                            <div>
-                                <p style={{ marginLeft: "10px", textAlign: 'start' }}>Bob</p>
-                                <p style={{ marginLeft: "10px", textAlign: 'start', marginTop: '-16px', fontSize: '11px', color: '#aaa' }}>Suggested for you</p>
-                            </div>
-                        </div>
-                        <div style={{ backgroundColor: "#aaa", padding: '10px', marginRight: 13, borderRadius: '50%', cursor: 'pointer' }}>
-                            <img src={`${addFriends}`} className="addfriend" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div style={{ marginTop: '-10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={`${image6}`} className="Profileimage" alt="" />
-                            <div>
-                                <p style={{ marginLeft: "10px", textAlign: 'start' }}>Elon Musk</p>
-                                <p style={{ marginLeft: "10px", textAlign: 'start', marginTop: '-16px', fontSize: '11px', color: '#aaa' }}>Followed by Qifeng Huang</p>
-                            </div>
-                        </div>
-                        <div style={{ backgroundColor: "#aaa", padding: '10px', marginRight: 13, borderRadius: '50%', cursor: 'pointer' }}>
-                            <img src={`${addFriends}`} className="addfriend" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div style={{ marginTop: '-10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={`${image7}`} className="Profileimage" alt="" />
-                            <div>
-                                <p style={{ marginLeft: "10px", textAlign: 'start' }}>Madan Bo</p>
-                                <p style={{ marginLeft: "10px", textAlign: 'start', marginTop: '-16px', fontSize: '11px', color: '#aaa' }}>Followed by Qifeng Huang</p>
-                            </div>
-                        </div>
-                        <div style={{ backgroundColor: "#aaa", padding: '10px', marginRight: 13, borderRadius: '50%', cursor: 'pointer' }}>
-                            <img src={`${addFriends}`} className="addfriend" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div style={{ marginTop: '-10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={`${image1}`} className="Profileimage" alt="" />
-                            <div>
-                                <p style={{ marginLeft: "10px", textAlign: 'start' }}>Jerry</p>
-                                <p style={{ marginLeft: "10px", textAlign: 'start', marginTop: '-16px', fontSize: '11px', color: '#aaa' }}>Followed by Qifeng Huang</p>
-                            </div>
-                        </div>
-                        <div style={{ backgroundColor: "#aaa", padding: '10px', marginRight: 13, borderRadius: '50%', cursor: 'pointer' }}>
-                            <img src={`${addFriends}`} className="addfriend" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div style={{ marginTop: '-10px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={`${image1}`} className="Profileimage" alt="" />
-                            <div>
-                                <p style={{ marginLeft: "10px", textAlign: 'start' }}>Tom</p>
-                                <p style={{ marginLeft: "10px", textAlign: 'start', marginTop: '-16px', fontSize: '11px', color: '#aaa' }}>Followed by Qifeng Huang</p>
-                            </div>
-                        </div>
-                        <div style={{ backgroundColor: "#aaa", padding: '10px', marginRight: 13, borderRadius: '50%', cursor: 'pointer' }}>
-                            <img src={`${addFriends}`} className="addfriend" alt="" />
-                        </div>
-                    </div>
-                </div>
+  const [users , setUsers] = useState([]);
+  useEffect(() => {
+    const getuser = async()=>{
+      try {
+        const res  = await axios.get(`http://localhost:8000/api/user/all/user/${idforSuggest}`)
+        setUsers(res.data);
+      } catch (error) {
+        console.log("Some error occured")
+      }
+    }
+    getuser();
+  }, [])
+  console.log(users)
+  
+  return (
+    <div className='Profilerightbar'>
+      <div className='profilerightcontainer'>
+        <h3>Followers</h3>
+        <div>
+          {Followinguser.map((item)=>(
+            <div style={{marginTop:"10px"}}>
+             <div style={{display:'flex' , alignItems:"center" , marginLeft:10 , cursor:"pointer"}}>
+              <img src={`${item.profile}`} className="Friendsimage" alt="" />
+              <p style={{textAlign:"start"  , marginLeft:"10px"}}>{item.username} </p>
             </div>
+          </div>
+            ))}
+          
+          
+          
         </div>
-    );
+
+      </div>
+
+      <div className='rightcontainer2'>
+        <h3 style={{textAlign:"start" , marginLeft:"10px"}}>Suggested for you</h3>
+        {users.map((item)=>(
+          <Follow userdetails={item}/>
+          ))}
+        
+      </div>
+
+
+    </div>
+  )
 }

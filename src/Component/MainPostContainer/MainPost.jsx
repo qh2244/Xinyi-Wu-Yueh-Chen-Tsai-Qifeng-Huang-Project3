@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import "./mainpost.css";
-import ContentPost from '../ContentPostContainer/ContentPost';
+import React from 'react'
+import "./mainPost.css";
+import ContentPost from "../ContentPostContainer/ContentPost"
 import Post from '../PostContainer/Post';
-
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 export default function MainPost() {
-    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2I3ODBmOThmNjJiZjAyMTdjN2RmMCIsInVzZXJuYW1lIjoieGlhb3NodWFuZyIsImlhdCI6MTcwMjYyMzAwNH0.Eb-Zqyb_yBjdqJduBsPzqeKx4-zy8lJmoTK7iawRHBQ";
-
-    const [post, setPost] = useState([]);
-    useEffect(() => {
-        const getPost = async () => {
-            try {
-                const res = await axios.get(`http://localhost:8000/api/user/flw/657b780f98f62bf0217c7df0`, {
-                    headers: {
-                        token: accessToken
-                    }
-                })
-                setPost(res.data);
-            } catch (error) {
-
-            }
+  const userDetails = useSelector((state)=>state.user);
+  let user = userDetails.user;
+  console.log(user);
+  let id = user?.other?._id;
+  const accesstoken = user.accessToken;
+  console.log(accesstoken)
+  const [post , setPost] = useState([]);
+  useEffect(() => {
+   const getPost = async()=>{
+    try {
+      const res = await axios.get(`http://localhost:8000/api/user/flw/${id}` , {
+        headers:{
+          token:accesstoken
         }
-        getPost();
-    }, [])
+      })
+      setPost(res.data);
+    } catch (error) {
+      
+    }
+   }
+   getPost();
+  }, [])
 
-    console.log(post);
-
-    return (
-        <div className='mainPostContainer'>
-            <ContentPost />
-            {post.map((item) => (
-                Array.isArray(item) ? (
-                    item.map((postdetails) => (
-                        <Post key={postdetails.id} post={postdetails} />
-                    ))
-                ) : (
-                    <Post key={item.id} post={item} />
-                )
-            ))}
-        </div>
-    );
+  console.log(post);
+  
+  return (
+    <div className='mainPostContainer'>
+      <ContentPost/>
+      {post.map((item)=>(
+          <Post post={item}/>
+      ))}
+    </div>
+  )
 }

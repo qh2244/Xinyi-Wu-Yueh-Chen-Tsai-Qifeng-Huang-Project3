@@ -20,7 +20,7 @@ export default function ProfileLeftbar() {
   useEffect(() => {
     const getuser = async()=>{
       try {
-        const res  = await axios.get(`http://139.144.12.15:80/api/user/post/user/details/${id}`)
+        const res  = await axios.get(`http://localhost:8000/api/user/post/user/details/${id}`)
         setuser(res.data);
       } catch (error) {
         console.log("Some error occured")
@@ -35,7 +35,7 @@ export default function ProfileLeftbar() {
   useEffect(() => {
     const getFollowing = async()=>{
       try {
-        const res = await axios.get(`http://localhost:5000/api/post/following/${id}`);
+        const res = await axios.get(`http://localhost:8000/api/post/following/${id}`);
         setFollowinguser(res.data);
       } catch (error) {
         console.log("Error")
@@ -46,10 +46,10 @@ export default function ProfileLeftbar() {
 
   const handleFollow = async()=>{
     if(Follow === "Follow"){
-      await fetch(`http://139.144.12.15:80/api/user/following/${id}` , {method:'PUT', headers:{'Content-Type':"application/JSON" , token:accessToken} , body:JSON.stringify({user:`${user.other._id}`})})
+      await fetch(`http://localhost:8000/api/user/following/${id}` , {method:'PUT', headers:{'Content-Type':"application/JSON" , token:accessToken} , body:JSON.stringify({user:`${user.other._id}`})})
       setUnFollow("UnFollow")
     }else{
-      await fetch(`http://139.144.12.15:80/api/user/following/${id}` , {method:'PUT', headers:{'Content-Type':"application/JSON" , token:accessToken} , body:JSON.stringify({user:`${user.other._id}`})})
+      await fetch(`http://localhost:8000/api/user/following/${id}` , {method:'PUT', headers:{'Content-Type':"application/JSON" , token:accessToken} , body:JSON.stringify({user:`${user.other._id}`})})
       setUnFollow("Follow")
     }
   }
@@ -64,7 +64,7 @@ export default function ProfileLeftbar() {
                                                   <img src={`${users.profile}`} className="Profilepageimage" alt="" />
                                                   <div>
                                                     <p style={{marginLeft:6 , marginTop:20 , color:"black" , textAlign:'start'}}>{users.username}</p>
-                                                    <p style={{marginLeft:6 , marginTop:20 , color:"black" , textAlign:"start" , fontSize:11}}>Software Developer</p>
+                                                    <p style={{marginLeft:6 , marginTop:20 , color:"black" , textAlign:"start", fontSize:11}}>Software Developer</p>
                                                   </div>
                                          </div>
                                          <div style={{display:'flex' , justifyContent:'space-between'}}>
