@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./post.css"
 import ProfileImage from "../Images/Profile.png"
 import LikeIcon from "../Images/like.png"
@@ -7,20 +7,38 @@ import CommentIcon from "../Images/speech-bubble.png"
 import ShareIcon from "../Images/share.png"
 import Moreoption from "../Images/more.png"
 import anotherlikeicon from "../Images/setLike.png"
+import axios from 'axios';
 
-export default function Post(post) {
-    const [Like, setLike] = useState(LikeIcon);
-    const [count, setCount] = useState(10);
+export default function Post({post}) {
+    const[user , setuser] = useState([]);
+    useEffect(() =>{
+        const getuser = async()=>{
+            try {
+                const res = await axios.get(`http://localhost:8000/api/user/post/user/details`)
+                setuser(res.data);
+            } catch (error) {
+                console.log("Some error occured")
+            }
+        }
+        getuser();
+    }, [])
+    const userId = "657b780f98f62bf0217c7df0"
+    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2I3ODBmOThmNjJiZjAyMTdjN2RmMCIsInVzZXJuYW1lIjoieGlhb3NodWFuZyIsImlhdCI6MTcwMjU5MDUwNH0.iquTTgjz6_pfcQ-x_lkmDMhxvgU-lI5xSlptGAHIPJ4"
+    const [Like, setLike] = useState([post.like.includes(userId) ? anotherlikeicon : LikeIcon]);
+    const [count, setCount] = useState(post.like.length);
     const [Comments, setComments] = useState([]);
     const [commentwriting, setcommentwriting] = useState('')
     const [show, setshow] = useState(false);
-    console.log(post)
 
-    const handleLike = () => {
-        if (Like === LikeIcon) {
+    
+   
+    const handleLike = async () => {
+        if (Like == LikeIcon) {
+            await fetch(`http://localhost:5173/api/post/${post._id}/like` , {method:"PUT" , header:{'Content-Type':"application/Json" , token:accessToken}})
             setLike(anotherlikeicon);
             setCount(count + 1);
         } else {
+            await fetch(`http://localhost:5173/api/post/${post._id}/like` , {method:"PUT" , header:{'Content-Type':"application/Json" , token:accessToken}})
             setLike(LikeIcon);
             setCount(count - 1);
         }
@@ -49,14 +67,17 @@ export default function Post(post) {
         }
     }
 
+    console.log(user)
+
     return (
         <div className='PostContainer'>
             <div className='SubPostContainer'>
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src={`${ProfileImage}`} className='PostImage' alt="" />
+                        {user.profile == "" ? <img src={`${ProfileImage}`} className='PostImage' alt="" /> : <img src={`${user.profile}`} className='PostImage' alt="" />}
+                        
                         <div>
-                            <p style={{ marginLeft: '5px', textAlign: 'start' }}>Qifeng</p>
+                            <p style={{ marginLeft: '5px', textAlign: 'start' }}>{user.username}</p>
                             <p style={{ fontSize: '11px', textAlign: 'start', marginLeft: 5, marginTop: -13, color: "#aaa" }}>Following by qifeng</p>
                         </div>
                         <img src={`${Moreoption}`} className='moreicons' alt="" />
@@ -71,7 +92,7 @@ export default function Post(post) {
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', marginLeft: 20, cursor: 'pointer' }}>
                                 <img src={`${CommentIcon}`} className='iconsforPost' onClick={handleshow} alt="" />
-                                <p style={{ marginLeft: '6px' }}>100k Comments</p>
+                                <p style={{ marginLeft: '6px' }}>{post.comments.length} Comments</p>
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', marginLeft: 180, cursor: 'pointer' }}>

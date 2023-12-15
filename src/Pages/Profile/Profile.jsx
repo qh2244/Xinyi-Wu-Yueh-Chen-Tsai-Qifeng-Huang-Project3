@@ -13,7 +13,7 @@ export default function Profile() {
             <div className='subProfileContainer'>
                 <ProfileLeftbar/>
                 <ProfileMainPost/>
-                <ProfileRightbar/>
+                {/* <ProfileRightbar/> */}
             </div>
         </div>
     )

@@ -256,7 +256,7 @@ router.put("/update/:id" , verifyToken , async(req , res)=>{
 })
 
 //Delete User account 
-router.delete("/delete/:id" , verifyToken , async(req , res)=>{
+router.delete("delete/:id" , verifyToken , async(req , res)=>{
     try {
         if(req.params.id !== req.user.id){
             return res.status(400).json("Account doesn't match")
@@ -276,7 +276,7 @@ router.get("/post/user/details/:id" , async(req , res)=>{
         if(!user){
             return res.status(400).json("User not found")
         }
-        const {email , password , phonenumber , ...others}=user._doc;
+        const {email , password , phonenumber , Followers , Following , ...others}=user._doc;
         res.status(200).json(others);
     } catch (error) {
         return res.status(500).json("Internal server error")
@@ -284,7 +284,7 @@ router.get("/post/user/details/:id" , async(req , res)=>{
 })
 
 //get user to follow
-router.get("/all/user/:id" , async(req , res)=>{
+router.get("/all/user/" , async(req , res)=>{
     try {
         const allUser = await User.find();
         const user = await User.findById(req.params.id);
@@ -308,7 +308,7 @@ router.get("/all/user/:id" , async(req , res)=>{
 
         res.status(200).json(filteruser)
     } catch (error) {
-        
+        return res.status(500).json("Internal server error")
     }
 })
 

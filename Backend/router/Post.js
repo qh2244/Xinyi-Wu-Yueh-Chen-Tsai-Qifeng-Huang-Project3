@@ -164,8 +164,10 @@ router.get("/followers/:id" , async(req , res)=>{
 
             res.status(200).json(followersList);
       } catch (error) {
-           return res.status(500).json("Internal server error")
+           
       }
 })
+
+
 
 module.exports = router;
