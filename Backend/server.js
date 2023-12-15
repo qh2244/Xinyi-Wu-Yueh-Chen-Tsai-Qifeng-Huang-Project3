@@ -21,6 +21,6 @@ app.use(express.json());
 app.use("/api/user", userRouter);
 app.use("/api/post", PostRouter)
 
-app.listen(8000, ()=>{
+app.listen(process.env.PORT || 8000, ()=>{
     console.log("Server is running")
 })
